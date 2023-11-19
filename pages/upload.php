@@ -20,7 +20,7 @@ if(isset($_POST["image"]))
     $conn = new mysqli("localhost", "root", "", "skillbridge");
 
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);   
     }
 
     $userId = 3; // Change this to the desired user ID

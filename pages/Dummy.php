@@ -12,7 +12,6 @@
         <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
         <script src="https://unpkg.com/dropzone"></script>
         <script src="https://unpkg.com/cropperjs"></script>
-
         <style>
 
             .image_area {
@@ -187,6 +186,4 @@
 
     });
 </script>
-        </html>
-
-
+</html>
