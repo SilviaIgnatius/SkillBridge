@@ -1,0 +1,208 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 23, 2023, 8:42:09 AM
+    Author     : Silvia_Ignatius
+*/
+
+.post {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    transition: box-shadow 0.3s;
+}
+
+.post:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.postProfileImg {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.postText {
+    margin-top: 10px;
+    color: #333;
+}
+
+.postLikeCounter {
+    margin-left: 5px;
+}
+
+.footerIcon {
+    margin-right: 5px;
+}
+
+.postVertButton {
+    color: #777;
+}
+
+.container.create-post {
+    margin-top: 20px;
+}
+
+.share-wrapper {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.share-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.share-profile {
+    display: flex;
+    align-items: center;
+}
+
+.share-profile-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.share-input {
+    border: none;
+    flex: 1;
+    outline-width: 0;
+}
+
+.share-hr {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.share-options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.share-icon {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.video-icon {
+    color: #bb0000f2;
+}
+
+.photo-icon {
+    color: #2e0196f1;
+}
+
+.share-post-button {
+    background-color: #55c360;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 75%;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.popup-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.popup-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.popup-input {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    height: 100px;
+    width: 100%;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.popup-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.popup-options {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.popup-option {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup-post-button {
+    background-color: #55c360;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    align-self: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
+    width: auto;
+}

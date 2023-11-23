@@ -1,8 +1,8 @@
 <?php
 $link = mysqli_connect("localhost", "root", "");
 mysqli_select_db($link, "skillbridge");
-$learnerId = 8;
-$tutorId = 2;
+$learnerId = 8; // i want to get it from session
+$tutorId = 2; // pass it through url and get it from GET method
 
 if (isset($_POST["subRev"])) {
 

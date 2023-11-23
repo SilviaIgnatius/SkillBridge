@@ -23,7 +23,7 @@ if (isset($_POST["email"], $_POST["password"])) {
         // Redirect based on user role
         switch ($_SESSION["user_role"]) {
             case 'learner':
-                $location = "../pages/learner.php";
+                $location = "../pages/Home.php";
                 break;
             case 'tutor':
                 $location = "../pages/tutorProfile.php";
