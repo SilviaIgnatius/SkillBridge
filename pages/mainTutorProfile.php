@@ -18,7 +18,7 @@ if (isset($_SESSION["user_id"])) {
 
         </head>
         <body>
-    <?php require '../include/VisitorNav.php'; ?>
+            <?php require '../include/VisitorNav.php'; ?>
             <div class="container mt-4">
                 <ul class="nav nav-tabs justify-content-center" id="myTabs">
                     <li class="nav-item">
@@ -27,21 +27,14 @@ if (isset($_SESSION["user_id"])) {
                     <li class="nav-item">
                         <a class="nav-link" id="posts-tab" data-bs-toggle="tab" href="#posts">Posts</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="portfolio-tab" data-bs-toggle="tab" href="#portfolio">Portfolio</a>
-                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile">
-    <?php require './tutorProfile.php'; ?>
+                        <?php require './tutorProfile.php'; ?>
                     </div>
                     <div class="tab-pane fade" id="posts">
-    <?php require './postFeed.php'; ?>
-                    </div>
-                    <div class="tab-pane fade" id="portfolio">
-                        <h2>hiiii</h2>                   
-    <?php // require './tutorPortfolio.php';  ?>
+                        <?php require './postFeed.php'; ?>
                     </div>
                 </div>
             </div>

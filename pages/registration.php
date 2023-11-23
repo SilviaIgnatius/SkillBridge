@@ -1,4 +1,5 @@
 <?php
+
 namespace classes;
 
 require_once '../classes/User.php';
@@ -11,7 +12,7 @@ if (isset($_POST["firstname"], $_POST["lastname"], $_POST["username"], $_POST["e
     if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) {
         $location = "SignUp.php?status=1";
     } elseif ($_POST["password"] !== $_POST["confirm_password"]) {
-        
+
         $location = "SignUp.php?status=3";
     } else {
         $firstname = $_POST["firstname"];

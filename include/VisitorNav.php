@@ -82,7 +82,9 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="../pages/mainTutorProfile.php">User Profile</a></li>
+                                        <li><a class="dropdown-item" href="../pages/tutorPortfolio.php" target="_blank">Portfolio</a></li>
                                         <li><a class="dropdown-item" href="../user/signOut.php" onclick="return confirm('Are you sure you want to log out?')">Log Out</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <?php
