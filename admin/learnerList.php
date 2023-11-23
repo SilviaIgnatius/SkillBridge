@@ -15,64 +15,59 @@ $dbcon = new DbConnector();
     </head>
     <body>
         <div id="adminNav"></div>
+        <?php include '../include/adminNav.php'; ?>
+        <div class="content">
+            <button class="btn btn-danger logout-button">Logout</button>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Username</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    try {
+                        $con = $dbcon->getConnection();
+                        $query = "SELECT firstname, lastname, email, username FROM user WHERE role = 'learner'";
+                        $pstmt = $con->prepare($query);
+                        $pstmt->execute();
+                        $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+                        $i = 1;
+                        foreach ($rs as $user) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i; ?></th>
+                                <td><?php echo $user->firstname; ?></td>
+                                <td><?php echo $user->lastname; ?></td>
+                                <td><?php echo $user->email; ?></td>
+                                <td><?php echo $user->username; ?></td>
+                                <td>
+                                    <button class="btn">
+                                        <span><i class="fas fa-trash" style="color: #ffffff;"></i></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;">                                      </i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php
+                            $i++;
+                        }
+                    } catch (PDOException $exc) {
+                        echo $exc->getMessage();
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
-        <?php include '../include/adminNav.php';?>
-
-<div class="content">
-    <button class="btn btn-danger logout-button">Logout</button>
-    <table class="table table-hover table-dark">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col" colspan="2">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        try {
-            $con = $dbcon->getConnection();
-            $query = "SELECT firstname, lastname, email, username FROM user WHERE role = 'learner'";
-            $pstmt = $con->prepare($query);
-            $pstmt->execute();
-            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
-            $i = 1;
-            foreach ($rs as $user) {
-                ?>
-
-                <tr>
-                    <th scope="row"><?php echo $i; ?></th>
-                    <td><?php echo $user->firstname; ?></td>
-                    <td><?php echo $user->lastname; ?></td>
-                    <td><?php echo $user->email; ?></td>
-                    <td><?php echo $user->username; ?></td>
-                    <td>
-                        <button class="btn">
-                            <span><i class="fas fa-trash" style="color: #ffffff;">Edit</i></span>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn">
-                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;">Delete</i>
-                        </button>
-                    </td>
-                </tr>
-
-                <?php
-                $i++;
-            }
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
-        }
-        ?>
-        </tbody>
-    </table>
-</div>
-
-<?php include '../include/adminFooter.php';?>
-<div id="adminFooter"></div>
+        <?php include '../include/adminFooter.php'; ?>
     </body>
 </html>

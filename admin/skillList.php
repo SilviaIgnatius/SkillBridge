@@ -26,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <button class="btn btn-danger logout-button">Logout</button>
             <table class="table table-hover table-dark">
                 <thead>
-                    <tr>
+                    <tr style="text-align: ">
                         <th scope="col">#</th>
                         <th scope="col">Skill Name</th>
                         <th scope="col">Description</th>
@@ -52,12 +52,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <td><?php echo $user->description; ?></td>
                                 <td>
                                     <button class="btn">
-                                        <span><i class="fas fa-trash" style="color: #ffffff;">Delete</i></span>
+                                        <span><i class="fas fa-trash" style="color: #ffffff;"></i></span>
                                     </button>
                                 </td>
                                 <td>
                                     <button class="btn">
-                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;">Edit</i>
+                                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -72,7 +72,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </tbody>
             </table>
         </div>
-
-        <?php include '../includes/adminFooter.php';?>
+        <?php include '../include/adminFooter.php'; ?>
     </body>
 </html>
