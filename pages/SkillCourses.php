@@ -4,8 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Skill Courses</title>
-        <link rel="stylesheet" href="../css/Courses.css"/>
+        <link rel="stylesheet" href="../css/SkillCourses.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+
+        </style>
     </head>
     <body>
 
@@ -40,7 +43,7 @@
             echo "<h1>" . $skillname . "</h1>";
             echo "<p>" . $description . "</p>";
             if ($result->num_rows > 0) {
-                $counter = 0; 
+                $counter = 0;
                 while ($row = $result->fetch_assoc()) {
                     if ($counter % 4 == 0) {
                         echo "<div class='row'>";

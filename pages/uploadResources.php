@@ -1,4 +1,5 @@
 <?php
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $skillName = $_POST['skillName'];
     $moduleName = $_POST['moduleName'];
@@ -18,10 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $sql = "SELECT s.skillid, m.moduleid
-            FROM skills s
-            JOIN skill_module sm ON s.skillid = sm.skillid
-            JOIN module m ON sm.moduleid = m.moduleid
-            WHERE s.skillname = '$skillName' AND m.modulename = '$moduleName'";
+FROM skills s
+JOIN skill_course sc ON s.skillid = sc.skillid
+JOIN course_module cm ON sc.courseid = cm.courseid
+JOIN module m ON cm.moduleid = m.moduleid
+WHERE s.skillname = '$skillName' AND m.modulename = '$moduleName'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $moduleId = $row['moduleid'];
 
         if (isset($_FILES['pdfFile'])) {
-            $uploadDir = 'upload/';
+            $uploadDir = '../uploads/';
             $pdfFile = $_FILES['pdfFile'];
             $pdfFileName = $pdfFile['name'];
             $pdfFilePath = $uploadDir . $pdfFileName;
@@ -38,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (move_uploaded_file($pdfFile['tmp_name'], $pdfFilePath)) {
 
                 $sql = "INSERT INTO pdf_resource (moduleid, resourceid, pdfname, file)
-                        VALUES ('$moduleId', NULL, '$pdfName', '$pdfFilePath')";
+            VALUES ('$moduleId', NULL, '$pdfName', '$pdfFilePath')";
                 if ($conn->query($sql) === TRUE) {
                     $pdfResourceID = $conn->insert_id;
                 } else {
@@ -51,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($videoURL)) {
             $sql = "INSERT INTO video_resource (moduleid, resourceid, videoname, videourl)
-                    VALUES ('$moduleId', NULL, '$videoName', '$videoURL')";
+            VALUES ('$moduleId', NULL, '$videoName', '$videoURL')";
             if ($conn->query($sql) === TRUE) {
                 $videoResourceID = $conn->insert_id;
             } else {

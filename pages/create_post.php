@@ -1,4 +1,5 @@
 <?php
+
 require_once '../classes/DbConnector.php';
 require_once '../classes/Post.php';
 
@@ -13,7 +14,7 @@ if (isset($_SESSION["user_id"])) {
 
         // Handle image upload
         $image_path = handleFileUpload('image_path', 'uploads/images/');
-        
+
         // Handle video upload
         $video_path = handleFileUpload('video_path', 'uploads/videos/');
 
@@ -40,7 +41,7 @@ if (isset($_SESSION["user_id"])) {
 }
 
 function handleFileUpload($fileInputName, $targetDirectory) {
-    $targetDir = realpath(__DIR__ . 'uploads') . $targetDirectory;
+    $targetDir = realpath(_DIR_ . 'uploads') . $targetDirectory;
     $uploadedFile = $_FILES[$fileInputName];
 
 
@@ -72,5 +73,5 @@ function handleFileUpload($fileInputName, $targetDirectory) {
         }
     }
 
-    return null; // Return null if file upload fails
+    return null; 
 }

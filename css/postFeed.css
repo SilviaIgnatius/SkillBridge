@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     border-radius: 10px;
     padding: 15px;
     transition: box-shadow 0.3s;
+    width: 50%;
 }
 
 .post:hover {
@@ -43,6 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .container.create-post {
     margin-top: 20px;
+    width: 30%;
 }
 
 .share-wrapper {

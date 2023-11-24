@@ -11,7 +11,7 @@ $con = DbConnector::getConnection();
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Leading Tutors</title>
+        <title>Skills</title>
         <link rel="stylesheet" href="../css/Skills.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -51,12 +51,12 @@ $con = DbConnector::getConnection();
                                 echo '<div class="card-body">';
                                 echo '<h5 class="card-title">';
                                 echo $row["skillname"];
-                                echo '<i class="fas fa-gem"></i>';
+                                
                                 echo '</h5>';
                                 echo '<p class="card-description" style="text-align: left;">';
                                 echo $row["description"];
                                 echo '</p>';
-                                echo '<button class="btn btn-primary">View More</button>';
+                                echo '<a href="SkillCourses.php?skillid=' . $row["skillid"] . '&skillname=' . urlencode($row["skillname"]) . '&description=' . urlencode($row["description"]) . ' "><button class="btn btn-primary">View More</button></a>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
@@ -67,7 +67,7 @@ $con = DbConnector::getConnection();
                                     if ($counter % 4 === 3 || $counter === $result->rowCount() - 1) {
                                         echo '<div class="row">';
                                         echo '<div class="col-md-12 text-right">';
-                                        
+
                                         echo '</div>';
                                         echo '</div>';
                                     }
@@ -94,7 +94,7 @@ $con = DbConnector::getConnection();
                 </nav>
             </div>
         </div>
-        <?php // require '../include/'; ?>
+        <?php // require '../include/VisitorFooter.php'; ?>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

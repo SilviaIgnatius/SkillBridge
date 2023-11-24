@@ -1,189 +1,123 @@
 <?php
-//index.php
+require_once '../classes/DbConnector.php';
+
+use classes\DbConnector;
+
+$dbcon = new DbConnector();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Crop Image Before Upload using CropperJS with PHP</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>        
-        <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
-        <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
-        <script src="https://unpkg.com/dropzone"></script>
-        <script src="https://unpkg.com/cropperjs"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/admin.css">
         <style>
-
-            .image_area {
-                position: relative;
-            }
-
-            img {
-                display: block;
-                max-width: 100%;
-            }
-
-            .preview {
-                overflow: hidden;
-                width: 160px;
-                height: 160px;
-                margin: 10px;
-                border: 1px solid red;
-            }
-
-            .modal-lg{
-                max-width: 1000px !important;
-            }
-
-            .overlay {
-                position: absolute;
-                bottom: 10px;
-                left: 0;
-                right: 0;
-                background-color: rgba(255, 255, 255, 0.5);
-                overflow: hidden;
-                height: 0;
-                transition: .5s ease;
-                width: 100%;
-            }
-
-            .image_area:hover .overlay {
-                height: 50%;
-                cursor: pointer;
-            }
-
-            .text {
-                color: #333;
-                font-size: 20px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -webkit-transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-                text-align: center;
-            }
 
         </style>
     </head>
     <body>
-        <div class="container" align="center">
-            <br />
-            <h3 align="center">Crop Image Before Upload using CropperJS with PHP</h3>
-            <br />
-            <div class="row">
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-4">
-                    <div class="image_area">
-                        <form method="post">
-                            <label for="upload_image">
-                                <img src="../img/Profile-Icon.png" id="uploaded_image" class="img-responsive img-circle" />
-                                <div class="overlay">
-                                    <div class="text">Click to Change Profile Image</div>
-                                </div>
-                                <input type="file" name="image" class="image" id="upload_image" style="display:none" />
-                            </label>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Crop Image Before Upload</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="img-container">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <img src="" id="sample_image" />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="preview"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="crop" class="btn btn-primary">Crop</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>			
-            </div>
-    </body>
-</html>
+        <?php require '../include/adminNav.php'; ?>
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "skillbridge";
 
-<script>
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $(document).ready(function () {
+// Check the connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-        var $modal = $('#modal');
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $skillName = $_POST["skillName"];
+            $description = $_POST["description"];
 
-        var image = document.getElementById('sample_image');
+            $targetDir = "../uploads/";
+            $targetFile = $targetDir . basename($_FILES["skillImage"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        var cropper;
-
-        $('#upload_image').change(function (event) {
-            var files = event.target.files;
-
-            var done = function (url) {
-                image.src = url;
-                $modal.modal('show');
-            };
-
-            if (files && files.length > 0)
-            {
-                reader = new FileReader();
-                reader.onload = function (event)
-                {
-                    done(reader.result);
-                };
-                reader.readAsDataURL(files[0]);
+            if (isset($_POST["submit"])) {
+                $check = getimagesize($_FILES["skillImage"]["tmp_name"]);
+                if ($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
             }
-        });
 
-        $modal.on('shown.bs.modal', function () {
-            cropper = new Cropper(image, {
-                aspectRatio: 1,
-                viewMode: 3,
-                preview: '.preview'
-            });
-        }).on('hidden.bs.modal', function () {
-            cropper.destroy();
-            cropper = null;
-        });
+            if (file_exists($targetFile)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
 
-        $('#crop').click(function () {
-            canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
-            });
+            if ($_FILES["skillImage"]["size"] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
 
-            canvas.toBlob(function (blob) {
-                url = URL.createObjectURL(blob);
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function () {
-                    var base64data = reader.result;
-                    $.ajax({
-                        url: 'upload.php',
-                        method: 'POST',
-                        data: {image: base64data},
-                        success: function (data)
-                        {
-                            $modal.modal('hide');
-                            $('#uploaded_image').attr('src', data);
-                        }
-                    });
-                };
-            });
-        });
+            $allowedExtensions = array("jpg", "jpeg", "png");
+            if (!in_array($imageFileType, $allowedExtensions)) {
+                echo "Sorry, only JPG, JPEG, and PNG files are allowed.";
+                $uploadOk = 0;
+            }
 
-    });
-</script>
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+            } else {
+                if (move_uploaded_file($_FILES["skillImage"]["tmp_name"], $targetFile)) {
+                    echo "The file " . basename($_FILES["skillImage"]["name"]) . " has been uploaded.";
+
+                    $stmt = $conn->prepare("INSERT INTO skills (skillname, skillimage, description) VALUES (?, ?, ?)");
+                    $stmt->bind_param("sss", $skillName, $targetFile, $description);
+
+                    if ($stmt->execute()) {
+                        echo "Skill information added successfully!";
+                    } else {
+                        echo "Error: " . $stmt->error;
+                    }
+
+                    $stmt->close();
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
+        }
+        ?>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center">
+                    <h2>Enter Skill Information</h2>
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="skillName" class="form-label">Skill Name:</label>
+                            <input type="text" id="skillName" name="skillName" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="skillImage" class="form-label">Skill Image (JPEG, PNG):</label>
+                            <input type="file" id="skillImage" name="skillImage" class="form-control" accept="image/jpeg, image/png" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea id="description" name="description" rows="4" class="form-control" required></textarea>
+                        </div>
+
+                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <?php
+        $conn->close();
+        ?>
+
+    </body>
 </html>

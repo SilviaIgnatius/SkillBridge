@@ -1,3 +1,7 @@
+<?php
+session_start();
+if (isset($_SESSION["user_id"])) {
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,9 +81,16 @@
             <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'skillList.php' ? 'active' : ''; ?>" href="../admin/skillList.php">Skill List</a>
             <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'moduleList.php' ? 'active' : ''; ?>" href="#ModuleList">Module List</a>
             <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'postList.php' ? 'active' : ''; ?>" href="#PostList">Posts List</a>
+            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'AddSkill.php' ? 'active' : ''; ?>" href="../admin/AddSkill.php">Add Skill</a>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-GLhlTQ8iKGu+2F6PKckGEKf538i4Zv3qMP7IcNTeDsdH+6Qjp0F4L8RniCzoI+" crossorigin="anonymous"></script>
 </body>
 </html>
+    <?php
+} else {
+    header("Location: ./SignIn.php");
+}
+$conn->close();
+?>

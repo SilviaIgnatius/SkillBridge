@@ -4,7 +4,9 @@ require_once '../classes/DbConnector.php';
 use classes\DbConnector;
 
 $dbcon = new DbConnector();
-?>
+session_start();
+if (isset($_SESSION["user_id"])) {
+    ?>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -75,3 +77,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <?php include '../include/adminFooter.php'; ?>
     </body>
 </html>
+    <?php
+} else {
+    header("Location: ./SignIn.php");
+}
+$conn->close();
+?>

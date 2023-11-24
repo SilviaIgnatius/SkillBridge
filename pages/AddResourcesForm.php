@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Upload Resources</h2>
-    <form action="sample_upload_resource.php" method="post" enctype="multipart/form-data">
+    <form action="UploadResourses.php" method="post" enctype="multipart/form-data">
         <label for="skillName">Skill Name:</label>
         <input type="text" id="skillName" name="skillName" required><br><br>
 
